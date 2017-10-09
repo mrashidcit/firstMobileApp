@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.example.myfirstapp.dummy.DummyContent;
 import com.example.myfirstapp.utilities.NetworkUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -43,21 +45,82 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
+        // Testign JSON Object Code
 
-        mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
+        JSONObject json = new JSONObject();
 
-        mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
+        // Temperature Object
+        JSONObject temp = new JSONObject();
+        try {
+            temp.put("max", 19.01);
+            temp.put("min", 11.34);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        // error Textview
-        mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
 
-        // ProgressBar reference
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+        JSONObject weather = new JSONObject();
+
+        try {
+            weather.put("id", 801);
+            weather.put("condition", "Clouds");
+            weather.put("description", "few clouds");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            json.put("pressure", "1023.51");
+            json.put("humidity", "87");
+
+            json.put("temp", temp);
+            json.put("weather", weather);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.d("Student", json.toString());
+
+        String condition = new String();
+        JSONObject weather2 = new JSONObject();
+
+        try {
+            Log.d("Student", json.toString());
+//            weather2.put("weather", json.getJSONObject("weather")) ;
+            weather2 = (JSONObject) json.getJSONObject("weather");
+
+            condition = weather2.getString("id");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+            // Testing JSON Object
+
+
+            mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
+
+            mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
+
+            mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
+
+            // error Textview
+            mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
+
+            // ProgressBar reference
+            mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+
 
 
 
     }
+
+
 
     // Show JsonData and hide the errors
     private void showJsonDataView() {
