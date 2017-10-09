@@ -6,59 +6,49 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.myfirstapp.dummy.DummyContent;
 
-public class MainActivity extends AppCompatActivity
-              implements HeadlinesFragment.OnListFragmentInteractionListener  {
+public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+
+    private TextView mweatherTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_article);
+        setContentView(R.layout.activity_main);
 
-        // Check the the activity is using the layout version with
-        // the fragment_container FrameLayout
-        if (findViewById(R.id.fragment_container) != null) {
+        mweatherTextView = (TextView) findViewById(R.id.tv_weather_data);
 
-            // However, if we're being resored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
+        String[] dummyWeatherData = {
+                "Today, May 17 - Clear - 17°C / 15°C",
+                "Tomorrow - Cloudy - 19°C / 15°C",
+                "Thursday - Rainy- 30°C / 11°C",
+                "Friday - Thunderstorms - 21°C / 9°C",
+                "Saturday - Thunderstorms - 16°C / 7°C",
+                "Sunday - Rainy - 16°C / 8°C",
+                "Monday - Partly Cloudy - 15°C / 10°C",
+                "Tue, May 24 - Meatballs - 16°C / 18°C",
+                "Wed, May 25 - Cloudy - 19°C / 15°C",
+                "Thu, May 26 - Stormy - 30°C / 11°C",
+                "Fri, May 27 - Hurricane - 21°C / 9°C",
+                "Sat, May 28 - Meteors - 16°C / 7°C",
+                "Sun, May 29 - Apocalypse - 16°C / 8°C",
+                "Mon, May 30 - Post Apocalypse - 15°C / 10°C",
+        };
 
-            if(savedInstanceState != null){
-                return ;
-            }
+        // Append each String from the fake wather data array to the Textview
 
-            // Create a new Fragment to be placed in the activity layout
-            HeadlinesFragment firstFragment = new HeadlinesFragment();
+        for (String dummyWeatherDay : dummyWeatherData){
+            mweatherTextView.append(dummyWeatherDay + "\n\n\n");
+        }
 
-            // In case this activity was started with spacial from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            firstFragment.setArguments((getIntent().getExtras()));
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
-        } // end if checking fragment_container
 
     }
 
 
 
-    // Called when the user taps the Send button
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
 
-
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 }

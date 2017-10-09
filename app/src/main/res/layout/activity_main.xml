@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,41 +8,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.myfirstapp.MainActivity">
 
-    <fragment android:name="com.example.myfirstapp.HeadlinesFragment"
-        android:id="@+id/headlines_fragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-    <fragment android:name="com.example.myfirstapp.ArticleFragment"
-        android:id="@+id/article_fragment"
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_weather_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            />
+
+    </ScrollView>
 
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="126dp"
-        android:layout_height="46dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Send"
-        android:onClick="sendMessage"
-        app:layout_constraintLeft_toRightOf="@+id/edit_message"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="62dp" />
 
-    <EditText
-        android:id="@+id/edit_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter a message"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/btnSend"
-        tools:layout_editor_absoluteY="62dp" />
-
-</LinearLayout>
+</FrameLayout>
