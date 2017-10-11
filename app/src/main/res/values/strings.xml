@@ -15,6 +15,11 @@
     <!-- labelling tomorrow's forecast-->
     <string name="tomorrow">Tomorrow</string>
 
+    <!-- string for the title of the refresh button, "Refresh
+        Used in overflow menu to refresh weather data
+    -->
+    <string name="action_refresh">Refresh</string>
+
 
     <!-- - - - - - - - - - - - - - - -->
     <!-- Used by SunshineWeatherUtils-->

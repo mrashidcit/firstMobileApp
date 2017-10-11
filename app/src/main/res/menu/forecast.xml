@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    >
+
+    <!-- Add one item to the menu with an ID of action_refresh -->
+    <!-- Set the title to "Referesh" using strings.xml -->
+
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"
+        android:title="@string/action_refresh"
+
+        />
+
+</menu>
