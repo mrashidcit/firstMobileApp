@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.myfirstapp.data.SunshinePreferences;
 import com.example.myfirstapp.dummy.DummyContent;
 import com.example.myfirstapp.utilities.NetworkUtils;
+import com.example.myfirstapp.utilities.OpenWeatherJsonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,13 +78,39 @@ public class MainActivity extends AppCompatActivity {
                 String jsonWeatherResponse = NetworkUtils
                         .getResponseFromHttpUrl(weatherRequestUrl);
 
-                String[] simpleJsonWeatherData = OpenWeatherJsonUrl
+                String[] simpleJsonWeatherData =
+                            OpenWeatherJsonUtils
+                            .getSimpleWeatherStringsFromJson(
+                                    MainActivity.this,
+                                    jsonWeatherResponse);
 
-            } catch (IOException e) {
+                return simpleJsonWeatherData;
+
+            } catch (Exception e) {
                 e.printStackTrace();
+                return null;
+            }
+        } // end doInBackground()
+
+        /**
+         * method to display results of the network request
+         * @param weatherData
+         */
+        protected void onPostExecute(String[] weatherData){
+
+            /**
+             * Iterate through the arrayu and append the Strings to the
+             * TextView. The reason why we add the "\n\n\n"
+             * after the String is to give visual separation
+             * between each String in the TextView. Later, we'll
+             * learn about a better way to display lists of data
+             */
+            for (String weatherString: weatherData) {
+                mWeatherTextView.append(weatherString + "\n\n\n") ;
             }
 
-            return new String[0];
+
+
         }
     }
 

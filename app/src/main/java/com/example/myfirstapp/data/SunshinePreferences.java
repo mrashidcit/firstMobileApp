@@ -36,6 +36,11 @@ public class SunshinePreferences {
         return getDefaultWeatherCoordinates();
     }
 
+    public static boolean isLocationLatLonAvailable(Context context) {
+//         will be implemented in a future lesson
+        return false;
+    }
+
 
 
 
@@ -48,6 +53,13 @@ public class SunshinePreferences {
 
         return DEFAULT_WEATHER_COORDINATES;
     }
+
+    public static boolean isMetric(Context context){
+//        will be implemented in future lesson
+        return true;
+    }
+
+
 
 
 
