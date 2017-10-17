@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_artical);
+        setContentView(R.layout.news_article);
 
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout

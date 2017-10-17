@@ -15,86 +15,51 @@ import org.w3c.dom.Text;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ArticleFragment.OnFragmentInteractionListener} interface
+
  * to handle interaction events.
- * Use the {@link ArticleFragment#newInstance} factory method to
+
  * create an instance of this fragment.
  */
 public class ArticleFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     static final String ARG_POSITION = "position";
-    static final String ARG_PARAM1 = "param1";
-    static final String ARG_PARAM2 = "param2";
 
     int mCurrentPosition = -1;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public ArticleFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ArticleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ArticleFragment newInstance(String param1, String param2) {
-        ArticleFragment fragment = new ArticleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // If activity recreated (such as from screen rotate), restore
+        // the previous article selection set by onSaveInstanceState().
+        // This is primarily necessary when in the two-pane layout.
+        if (savedInstanceState != null) {
+            mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_artical, container, false);
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+    public void onStart() {
+        super.onStart();
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        // During startup, check if there are arguments passed to the fragment.
+        // onStart is a good place to do this because the layout has already been
+        // applied to the fragment at this point so we can safely call the method
+        // below that sets the article text.
+
+        Bundle args = getArguments();
+        if (args != null){
+            // Set article based on argument passed in
+            updateArticleView(args.getInt(ARG_POSITION));
+        } else if(mCurrentPosition != -1){
+            // Set article based on saved instance state defined during onCreateView
+            updateArticleView(mCurrentPosition);;
+        }
     }
 
     public void updateArticleView(int position){
@@ -103,20 +68,16 @@ public class ArticleFragment extends Fragment {
         mCurrentPosition = position;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        // Save the current article selection in case we need to recreate the fragment
+        outState.putInt(ARG_POSITION, mCurrentPosition);
+
+
     }
+
 
 
 }
