@@ -13,6 +13,45 @@
           - Used by Preferences  -
           - - - - - - - - - - - - - - - -->
 
+    <!-- Label for the show bass checkbox preference -->
+    <string name="pref_show_bass_label">Show Bass</string>
+    <!-- Key name for storing bass in SharedPreferences -->
+    <string name="pref_show_bass_key" translatable="false">show_bass </string>
+
+    <!--Label for show mid range checkbox -->
+    <string name="pref_show_mid_range_label">Show Mid Range</string>
+
+    <!--key for show mid range checkbox -->
+    <string name="pref_show_mid_range_key">show_mid_range</string>
+
+    <!--Label for show mid range checkbox -->
+    <string name="pref_show_treble_label">Show Treble</string>
+
+    <!--key for show terble checkbox -->
+    <string name="pref_show_treble_key">show_treble</string>
+
+
+    <!-- Summary for Checkboxes -->
+    <string name="pref_show_true">Shown</string>
+    <string name="pref_show_false">Hidden</string>
+
+    <!-- COMPLETED (2) Add string values for the list preference -->
+    <!-- Label for the color preference -->
+    <string name="pref_color_label">Shape Color</string>
+
+    <!-- ************Labels for Colors************ -->
+    <!-- red -->
+    <string name="pref_color_red_label">Red</string>
+    <!-- blue -->
+    <string name="pref_color_blue_label">Blue</string>
+    <!-- green -->
+    <string name="pref_color_green_label">Green</string>
+
+
+    <!-- Key name for color preference in SharedPreferences -->
+    <string name="pref_color_key" translatable="false">color</string>
+
+
     <!-- Value in SharedPreferences for red color option -->
     <string name="pref_color_red_value" translatable="false">red</string>
 
