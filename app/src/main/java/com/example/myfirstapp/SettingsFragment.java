@@ -3,6 +3,7 @@ package com.example.myfirstapp;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -94,6 +95,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 // Set the summary to that label
                 listPreference.setSummary(listPreference.getEntries()[prefIndex]);
             }
+        } else if (preference instanceof EditTextPreference) {
+            // For EditTextPreferences, set the summary to the value's simple string representation.
+            preference.setSummary(value);
         }
     }
 
